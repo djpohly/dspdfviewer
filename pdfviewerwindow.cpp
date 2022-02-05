@@ -180,7 +180,7 @@ void PDFViewerWindow::keyPressEvent(QKeyEvent* e)
       case Qt::Key_Question: // Help
 	keybindingsPopup();
 	break;
-      case Qt::Key_G:
+      case Qt::ControlModifier | Qt::Key_G:
 	changePageNumberDialog();
 	break;
       case Qt::Key_F12:
@@ -213,6 +213,12 @@ void PDFViewerWindow::keyPressEvent(QKeyEvent* e)
       case Qt::Key_Backspace:
       case Qt::Key_N: //Previous
 	emit previousPageRequested();
+	break;
+      case Qt::Key_G: //start
+	emit pageRequested(minimumPageNumber);
+	break;
+      case Qt::ShiftModifier | Qt::Key_G: //end
+	emit pageRequested(maximumPageNumber);
 	break;
       case Qt::Key_B:
       case Qt::Key_Period:
