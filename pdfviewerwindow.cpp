@@ -174,7 +174,7 @@ void PDFViewerWindow::keyPressEvent(QKeyEvent* e)
 {
     QWidget::keyPressEvent(e);
 
-    switch( e->key() )
+    switch( QApplication::keyboardModifiers() | e->key() )
     {
       case Qt::Key_F1:
       case Qt::Key_Question: // Help
