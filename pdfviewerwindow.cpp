@@ -242,6 +242,9 @@ void PDFViewerWindow::keyPressEvent(QKeyEvent* e)
 	emit pageRequested(count ? count - 1 : maximumPageNumber);
 	count = 0;
 	break;
+      case Qt::Key_M:
+	std::cout << (currentPageNumber + 1) << std::endl;
+	break;
       case Qt::Key_B:
       case Qt::Key_Period:
 	emit blankToggleRequested();
