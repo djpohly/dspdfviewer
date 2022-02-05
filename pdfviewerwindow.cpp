@@ -191,7 +191,7 @@ void PDFViewerWindow::keyPressEvent(QKeyEvent* e)
       case Qt::Key_Q: //quit
 	emit quitRequested();
 	break;
-      case Qt::Key_T:
+      case Qt::Key_C: //toggle comments
 	emit secondScreenFunctionToggleRequested();
 	break;
       case Qt::Key_D:
@@ -204,14 +204,14 @@ void PDFViewerWindow::keyPressEvent(QKeyEvent* e)
       case Qt::Key_Down:
       case Qt::Key_Right:
       case Qt::Key_F: // Forward
-      case Qt::Key_N: // Next
+      case Qt::Key_T: // Next
 	emit nextPageRequested();
 	break;
       case Qt::Key_PageUp:
       case Qt::Key_Up:
       case Qt::Key_Left:
       case Qt::Key_Backspace:
-      case Qt::Key_P: //Previous
+      case Qt::Key_N: //Previous
 	emit previousPageRequested();
 	break;
       case Qt::Key_B:
