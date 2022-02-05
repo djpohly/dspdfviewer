@@ -219,7 +219,6 @@ void PDFViewerWindow::keyPressEvent(QKeyEvent* e)
 	emit blankToggleRequested();
 	break;
       case Qt::Key_Home:
-      case Qt::Key_H: //Home
 	emit restartRequested();
 	break;
     }
