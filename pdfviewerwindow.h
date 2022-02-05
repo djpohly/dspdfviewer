@@ -42,6 +42,7 @@ private:
   QImage currentImage;
   bool blank;
   bool informationLineVisible;
+  uint count;
 
   uint currentPageNumber;
   uint minimumPageNumber;

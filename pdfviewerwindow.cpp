@@ -59,6 +59,7 @@ PDFViewerWindow::PDFViewerWindow(unsigned int monitor, PagePart pagePart, bool s
   currentImage(),
   blank(false),
   informationLineVisible(false),
+  count(0),
   currentPageNumber(0),
   minimumPageNumber(0),
   maximumPageNumber(65535),
@@ -176,25 +177,41 @@ void PDFViewerWindow::keyPressEvent(QKeyEvent* e)
 
     switch( QApplication::keyboardModifiers() | e->key() )
     {
+      case Qt::Key_0:
+      case Qt::Key_1:
+      case Qt::Key_2:
+      case Qt::Key_3:
+      case Qt::Key_4:
+      case Qt::Key_5:
+      case Qt::Key_6:
+      case Qt::Key_7:
+      case Qt::Key_8:
+      case Qt::Key_9:
+	count = count * 10 + (e->key() - Qt::Key_0);
+	break;
       case Qt::Key_F1:
       case Qt::Key_Question: // Help
 	keybindingsPopup();
 	break;
       case Qt::ControlModifier | Qt::Key_G:
 	changePageNumberDialog();
+	count = 0;
 	break;
       case Qt::Key_F12:
       case Qt::Key_S: //Swap
 	emit screenSwapRequested();
+	count = 0;
 	break;
       case Qt::Key_Q: //quit
 	emit quitRequested();
 	break;
       case Qt::Key_C: //toggle comments
 	emit secondScreenFunctionToggleRequested();
+	count = 0;
 	break;
       case Qt::Key_D:
 	emit secondScreenDuplicateRequested();
+	count = 0;
 	break;
       case Qt::Key_Space:
       case Qt::Key_Enter:
@@ -204,26 +221,31 @@ void PDFViewerWindow::keyPressEvent(QKeyEvent* e)
       case Qt::Key_Right:
       case Qt::Key_F: // Forward
       case Qt::Key_T: // Next
-	emit nextPageRequested();
+	emit pageRequested(currentPageNumber + (count ? count : 1));
+	count = 0;
 	break;
       case Qt::Key_PageUp:
       case Qt::Key_Up:
       case Qt::Key_Left:
       case Qt::Key_Backspace:
       case Qt::Key_N: //Previous
-	emit previousPageRequested();
+	emit pageRequested(currentPageNumber - (count ? count : 1));
+	count = 0;
 	break;
       case Qt::Key_Home:
       case Qt::Key_G: //start
-	emit pageRequested(minimumPageNumber);
+	emit pageRequested(count ? count - 1 : minimumPageNumber);
+	count = 0;
 	break;
       case Qt::Key_End:
       case Qt::ShiftModifier | Qt::Key_G: //end
-	emit pageRequested(maximumPageNumber);
+	emit pageRequested(count ? count - 1 : maximumPageNumber);
+	count = 0;
 	break;
       case Qt::Key_B:
       case Qt::Key_Period:
 	emit blankToggleRequested();
+	count = 0;
 	break;
       case Qt::ShiftModifier | Qt::Key_F5:
       case Qt::Key_Escape:
