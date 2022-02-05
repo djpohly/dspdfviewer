@@ -214,18 +214,17 @@ void PDFViewerWindow::keyPressEvent(QKeyEvent* e)
       case Qt::Key_N: //Previous
 	emit previousPageRequested();
 	break;
+      case Qt::Key_Home:
       case Qt::Key_G: //start
 	emit pageRequested(minimumPageNumber);
 	break;
+      case Qt::Key_End:
       case Qt::ShiftModifier | Qt::Key_G: //end
 	emit pageRequested(maximumPageNumber);
 	break;
       case Qt::Key_B:
       case Qt::Key_Period:
 	emit blankToggleRequested();
-	break;
-      case Qt::Key_Home:
-	emit restartRequested();
 	break;
     }
 }
