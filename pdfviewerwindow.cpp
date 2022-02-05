@@ -187,7 +187,6 @@ void PDFViewerWindow::keyPressEvent(QKeyEvent* e)
       case Qt::Key_S: //Swap
 	emit screenSwapRequested();
 	break;
-      case Qt::Key_Escape:
       case Qt::Key_Q: //quit
 	emit quitRequested();
 	break;
@@ -225,6 +224,10 @@ void PDFViewerWindow::keyPressEvent(QKeyEvent* e)
       case Qt::Key_B:
       case Qt::Key_Period:
 	emit blankToggleRequested();
+	break;
+      case Qt::ShiftModifier | Qt::Key_F5:
+      case Qt::Key_Escape:
+	// bottom button on wireless clicker: do nothing for now
 	break;
     }
 }
